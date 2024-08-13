@@ -15,7 +15,7 @@ To enable OpenShift logs forwarding to Azure Monitor, you need:
 
 - A Log Analytics Workspace created
 - OpenShift cluster-admin access
-- The Red Hat OpenShift Logging Operator 5.9 or later installed on your cluster. You can leverage the `operator-utils` chart to install it.
+- The Red Hat OpenShift Logging Operator 5.9 or later installed on your cluster.
 - Helm version 3.8 or greater
 
 ## Usage
@@ -169,12 +169,6 @@ Additionally, none of the server-side testing of chart validity (e.g. whether an
 helm template --values openshift-log-forwarding/values.yaml openshift-logging/
 ```
 
-
-## TODO
-
-- [ ] Adapt and test the manifests to work for the Servier's OpenShift target architecture
-- [ ] Leverage Azure Vault for chart's secrets management
-- [ ] Add ArgoCD syncwave annotations to make the `ClusterLogging` CR is created before `ClusterLogForwarder` one. 
 
 ## References
 

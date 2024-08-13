@@ -5,7 +5,7 @@ description: A Helm Chart to install and configure OpenShift Logging and OpenShi
 type: application
 version: 0.1.0
 
-home: "https://github.com/servier-github"
+home: "https://github.com/abessifi/openshift-log-forwarding"
 
 maintainers:
   - name: Ahmed Bessifi
