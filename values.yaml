@@ -1,0 +1,43 @@
+# Default values for Helm Chat.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# To create a log forwarder, the ClusterLogForwarder must specifies the log input types that will be be collected. You can also specify which outputs the logs can be forwarded to.
+# https://docs.openshift.com/container-platform/4.14/observability/logging/log_collection_forwarding/configuring-log-forwarding.html#logging-create-clf_configuring-log-forwarding
+# In this example of configuration you can define a Pipeline to forward OpenShift Infrastructure Logs to an existing AzureMonitor Workspace by only setting the `customerId` and secret informations.
+# The creation of the secret is a requirement for this step. See the `Usage` section in the README file. 
+ClusterLogForwarder:
+  # You can use multiple types of outputs in the ClusterLogForwarder to send logs to servers that support different protocols.
+  outputs: # Required
+  - name: azure-monitor
+    type: azureMonitor
+    azureMonitor:
+      customerId: "" # Required
+      # Azure record type of the data being submitted. May only contain letters, numbers, and underscores (_), and may not exceed 100 characters.
+      # it's used as a "label" to filter logs when querying the Azure Log Workspace.
+      logType: infra_log
+    secret:
+       name: azure-workspace-key
+  inputs: [] # Optional
+  # inputs:
+  #  - name: foobar-logs
+  #    application:
+  #       namespaces:
+  #       - foobar
+  pipelines: # Required
+  # The log types that are collected. The value for this field can be `audit` for audit logs, `application` for application logs,
+  # `infrastructure` for infrastructure logs, or a named input that has been defined for your application.
+  # The type of output that you want to forward logs to. The value of this field can be default, loki, kafka, elasticsearch, fluentdForward, syslog, azureMonitr, or cloudwatch.
+  # - inputRefs:
+  #   - <log_type> 
+  #    outputRefs:
+  #   - <output_name> 
+  - name: infra-pipeline
+    inputRefs:
+    - infrastructure
+    outputRefs:
+    # the `outputRef` should have the same value as one of the defined outputs above
+    - azure-monitor
+    # labels:
+    #   foo: xxxxxx
+    #   bar: xxxxxx

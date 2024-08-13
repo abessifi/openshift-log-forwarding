@@ -1,0 +1,11 @@
+kind: ClusterLogForwarder
+apiVersion: logging.openshift.io/v1
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs: {{- .Values.ClusterLogForwarder.outputs | toYaml | trim | nindent 4 }}
+{{ if .Values.ClusterLogForwarder.inputs }}
+  inputs: {{- .Values.ClusterLogForwarder.inputs | toYaml | trim | nindent 4 }}
+{{ end }}
+  pipelines: {{- .Values.ClusterLogForwarder.pipelines | toYaml | trim | nindent 4 }}

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: openshift-log-forwarding
+description: A Helm Chart to install and configure OpenShift Logging and OpenShift Log Forwarder stacks. This requires the OpenShift Logging Operator to be installed.
+
+type: application
+version: 0.1.0
+
+home: "https://github.com/servier-github"
+
+maintainers:
+  - name: Ahmed Bessifi
